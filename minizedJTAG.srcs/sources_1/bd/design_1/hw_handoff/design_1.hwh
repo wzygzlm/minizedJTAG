@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Aug  1 19:15:53 2019" VIVADOVERSION="2018.1">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Aug  1 20:15:24 2019" VIVADOVERSION="2018.1">
 
   <SYSTEMINFO ARCH="zynq" BOARD="em.avnet.com:minized:part0:1.2" DEVICE="7z007s" NAME="design_1" PACKAGE="clg225" SPEEDGRADE="-1"/>
 

@@ -49,8 +49,9 @@ module minizedJTAG #(parameter N = 999)(
     
     /* This process consists of three parts: 
     1. Initialize part, IDCode could shift out automatically for zynq 7000 devices as the IR is default set to IDCode
-    2. BYPASS Test
-    3. ICOode Test
+    2. IR setting verify test.
+    3. BYPASS Test
+    4. ICOode Test
     */   
     always @(posedge clkTCK)
         begin
@@ -102,7 +103,41 @@ module minizedJTAG #(parameter N = 999)(
                 regTMS <= 1'b1;
             end              
 
-/* part 2: BYPASS Test. The first procedure is go to SELECT-IR-SCAN first and set TDI to BYPASS instruction.
+/*  part 2: Capture test.
+    Set a user pattern value and then read it on TDO.
+    Here we use 0101....0101 which inverse 0 and 1 every clock.
+    This data should be shifted after the pre-defined capture pattern value in the BSDL file is shifted out.
+    */
+        if (TMSCnt == 60)                // Make sure current state is in the TEST-LOGIC-RESET
+            begin
+               regTMS <= 1'b0;
+               regTDI <= 1'b1;
+            end   
+   
+        if (TMSCnt == 61)
+            begin
+               regTMS <= 1'b1;         // Current in RUN-TEST/IDLE, next to SELECT-DR-SCAN
+               regTDI <= 1'b1;
+            end  
+        
+        if (TMSCnt == 63)
+            begin
+               regTMS <= 1'b0;         // Current in SELECT-IR-SCAN , next to CAPTURE-IR
+               regTDI <= 1'b1;
+            end  
+           
+        if (TMSCnt >= 65 && TMSCnt <= 89)
+             begin
+                 regTDI <= ~regTDI;     // Start to set TDI test data. This data could be used to test TDI and TDO connection.
+             end    
+              
+        if (TMSCnt == 90)
+            begin
+              regTMS <= 1'b1;     // Exit Shift-IR
+            end   
+            
+/* part 3: BYPASS Test. 
+   The first procedure is go to SELECT-IR-SCAN first and set TDI to BYPASS instruction.
    For zynq, BYPASS IDCode is 111111.
    Similar to TDI in the shift-DR, it also need to be shifted in on the posedge of two cycles after entering SELECT-IR-SCAN.
    In SHIFT-IR state, TDI is connected to IR, IR is connected to TDO.
@@ -111,84 +146,73 @@ module minizedJTAG #(parameter N = 999)(
    The following is similar to part 1.
    */
   
-        if (TMSCnt == 60)                // Make sure current state is in the TEST-LOGIC-RESET
+        if (TMSCnt == 160)                // Make sure current state is in the TEST-LOGIC-RESET
             begin
                 regTMS <= 1'b0;
                 regTDI <= 1'b1;
             end   
         
-        if (TMSCnt == 61)
+        if (TMSCnt == 161)
             begin
                 regTMS <= 1'b1;         // Current in RUN-TEST/IDLE, next to SELECT-DR-SCAN
                 regTDI <= 1'b1;
             end  
         
-        if (TMSCnt == 63)
+        if (TMSCnt == 163)
             begin
                 regTMS <= 1'b0;         // Current in SELECT-IR-SCAN , next to CAPTURE-IR
                 regTDI <= 1'b1;
             end  
             
-         if (TMSCnt == 65)
+         if (TMSCnt == 165)
             begin
                 regTDI <= 1'b1;       // Entering SHIFT-IR, start to set TDI on IR.
             end   
             
-        if (TMSCnt == 66)
+        if (TMSCnt == 166)
             begin
                 regTDI <= 1'b1;
             end   
                 
-         if (TMSCnt == 67)
+         if (TMSCnt == 167)
             begin
                 regTDI <= 1'b1;
             end       
         
-        if (TMSCnt == 68)
+        if (TMSCnt == 168)
             begin
                 regTDI <= 1'b1;
             end   
                 
-         if (TMSCnt == 69)
+         if (TMSCnt == 169)
             begin
                 regTDI <= 1'b1;
             end  
         
           // Set the last bit of TDI, "111" on TMS guide it to SELECT-DR-SCAN
-         if (TMSCnt == 70)
+         if (TMSCnt == 170)
             begin
                 regTMS <= 1'b1;   
                 regTDI <= 1'b1;
             end  
                              
-        if (TMSCnt == 73)
+        if (TMSCnt == 173)
             begin
                 regTMS <= 1'b0;     // Curent in SELECT-DR-SCAN, next to Capture-DR
             end   
             
-        if (TMSCnt == 75)
-            begin
-                regTDI <= 1'b1;     // Start to set TDI test data. This data could be used to test TDI and TDO connection, TDO is shifted one clock after TDI in BYPASS mode.
-            end   
-        if (TMSCnt == 76)
-           begin
-               regTDI <= 1'b0;     
-           end   
-        if (TMSCnt == 77)
-            begin
-                regTDI <= 1'b1;     
-            end   
-        if (TMSCnt == 78)
-           begin
-               regTDI <= 1'b0;     
-           end  
+        if (TMSCnt >= 175 && TMSCnt <= 219)
+             begin
+                 regTDI <= ~regTDI;     // Start to set TDI test data. This data could be used to test TDI and TDO connection, TDO is shifted one clock after TDI in BYPASS mode.
+             end    
                                                                                           
-        if (TMSCnt == 120)
+        if (TMSCnt == 220)
              begin
                  regTMS <= 1'b1;     // Exit SHIFT-DR.
              end                 
 
-/* Part 3: similar to part 2. Only the IDCode is changed from 111111 to 001001.
+/* part 4: IDCode test.
+   similar to part 3. Only the IDCode is changed from 111111 to 001001.
    As the TDI is LSB first, so the sequence on TDI should be 100100
    */
         if (TMSCnt == 260)                // Make sure current state is in the TEST-LOGIC-RESET
@@ -246,33 +270,21 @@ module minizedJTAG #(parameter N = 999)(
                  regTMS <= 1'b0;     // Curent in SELECT-DR-SCAN, next to Capture-DR
              end   
              
-        if (TMSCnt == 275)
+        if (TMSCnt >= 275 && TMSCnt <= 319)
              begin
-                 regTDI <= 1'b1;     // Start to set TDI test data. This data could be used to test TDI and TDO connection, TDO is shifted one clock after TDI in BYPASS mode.
+                 regTDI <= ~regTDI;     // Start to set TDI test data. This data could be used to test TDI and TDO connection, TDO is shifted one clock after TDI in BYPASS mode.
              end   
-        if (TMSCnt == 276)
-            begin
-                regTDI <= 1'b0;     
-            end   
-        if (TMSCnt == 277)
-             begin
-                 regTDI <= 1'b1;     
-             end   
-        if (TMSCnt == 278)
-            begin
-                regTDI <= 1'b0;     
-            end  
                                                                                            
          if (TMSCnt == 320)
               begin
                   regTMS <= 1'b1;     // Exit SHIFT-DR.
               end    
-                                                                                                                    
-        TMSCnt <= TMSCnt + 1;    
-    end 
-                
-     assign TCK = clkTCK;
-     assign TMS = regTMS;
-     assign TDI = regTDI; 
+                                                                                                                        
+            TMSCnt <= TMSCnt + 1;    
+        end 
+                    
+         assign TCK = clkTCK;
+         assign TMS = regTMS;
+         assign TDI = regTDI; 
             
 endmodule

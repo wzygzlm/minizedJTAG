@@ -4164,3 +4164,31 @@ Design is not opened in the current session.
 
 !ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:19:17.348
 !MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:41:42.794
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:41:49.250
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:58:14.991
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:58:19.945
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 19:58:40.514
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 20:19:17.703
+!MESSAGE Updating toolusage
+
+!ENTRY com.xilinx.sdk.utils 0 0 2019-08-01 20:19:21.807
+!MESSAGE XSCT Command: [::hsi::utils::get_addr_tag_info -json E:/PhD_project/vivado_prjs/minizedJTAG/minizedJTAG.sdk/design_1_wrapper_hw_platform_0/system.hdf ], Thread: main
+
+!ENTRY com.xilinx.sdk.utils 0 0 2019-08-01 20:19:21.810
+!MESSAGE XSCT command with result: [::hsi::utils::get_addr_tag_info -json E:/PhD_project/vivado_prjs/minizedJTAG/minizedJTAG.sdk/design_1_wrapper_hw_platform_0/system.hdf ], Result: [null, {"ps7_cortexa9_0": "",
+}]. Thread: main
+
+!ENTRY com.xilinx.sdk.utils 1 0 2019-08-01 20:19:26.076
+!MESSAGE Updating toolusage

@@ -166,3 +166,9 @@ Design is not opened in the current session.
 18:39:15 INFO  : Bootgen command execution is done.
 19:19:11 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
 19:19:13 INFO  : Bootgen command execution is done.
+19:41:42 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+19:41:44 INFO  : Bootgen command execution is done.
+19:58:14 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+19:58:16 INFO  : Bootgen command execution is done.
+20:19:17 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+20:19:19 INFO  : Bootgen command execution is done.
