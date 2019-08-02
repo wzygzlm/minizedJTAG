@@ -21,10 +21,10 @@
 
 
 module minizedJTAG #(parameter N = 999)(
-    input TDO,
-    output TMS,
-    output TDI,
-    output TCK,
+    input TDO,      // minized IO2
+    output TMS,     // minized IO0
+    output TDI,     // minized IO1
+    output TCK,     // minized IO3
     
     input sysClk
     );

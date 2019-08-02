@@ -183,3 +183,7 @@ Design is not opened in the current session.
 20:52:06 INFO  : Bootgen command execution is done.
 21:04:23 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
 21:04:24 INFO  : Bootgen command execution is done.
+19:28:18 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+19:28:19 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+19:31:00 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
+19:31:59 INFO  : Connected to target on host '127.0.0.1' and port '3121'.
