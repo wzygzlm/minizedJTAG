@@ -45,13 +45,14 @@ module minizedJTAG #(parameter N = 999)(
     
     reg regTMS = 1; 
     reg regTDI = 1;
-    reg[63:0] TMSCnt = 0;
+    reg[9:0] TMSCnt = 0;
     
     /* This process consists of three parts: 
     1. Initialize part, IDCode could shift out automatically for zynq 7000 devices as the IR is default set to IDCode
     2. IR setting verify test.
     3. BYPASS Test
     4. ICOode Test
+    5. same to part 1
     */   
     always @(posedge clkTCK)
         begin
@@ -279,6 +280,45 @@ module minizedJTAG #(parameter N = 999)(
               begin
                   regTMS <= 1'b1;     // Exit SHIFT-DR.
               end    
+              
+/* part 5: go back to TEST-LOGIC-Reset to test part 1 again. */
+        if (TMSCnt == 410)                 // Make sure current state is in the TEST-LOGIC-RESET
+            begin
+                regTMS <= 1'b0;
+                regTDI <= 1'b1;
+            end
+            
+        if (TMSCnt == 411)
+            begin
+                regTMS <= 1'b1;         // Current in RUN-TEST/IDLE, next to SELECT-DR-SCAN
+            end    
+            
+        if (TMSCnt == 412)
+            begin
+                regTMS <= 1'b0;         // Current in SELECT-DR-SCAN , next to CAPTURE-DR
+            end  
+        
+         if (TMSCnt == 414)
+            begin
+                regTDI <= 1'b0;        // Entering SHIFT-DR
+            end                                     
+        if (TMSCnt == 415)
+            begin
+                regTDI <= 1'b1;
+            end   
+         if (TMSCnt == 416)
+            begin
+                regTDI <= 1'b0;
+            end   
+        if (TMSCnt == 417)
+            begin
+                regTDI <= 1'b1;
+            end   
+                                                                                          
+        if (TMSCnt == 450)
+            begin
+                regTMS <= 1'b1;
+            end                            
                                                                                                                         
             TMSCnt <= TMSCnt + 1;    
         end 

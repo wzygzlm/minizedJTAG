@@ -172,3 +172,14 @@ Design is not opened in the current session.
 19:58:16 INFO  : Bootgen command execution is done.
 20:19:17 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
 20:19:19 INFO  : Bootgen command execution is done.
+20:40:42 INFO  : Launching XSCT server: xsct.bat -interactive E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.sdk\temp_xsdb_launch_script.tcl
+20:40:44 INFO  : XSCT server has started successfully.
+20:40:44 INFO  : Successfully done setting XSCT server connection channel  
+20:40:47 INFO  : Successfully done setting SDK workspace  
+20:40:49 INFO  : Registering command handlers for SDK TCF services
+20:41:05 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+20:41:06 INFO  : Bootgen command execution is done.
+20:52:04 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+20:52:06 INFO  : Bootgen command execution is done.
+21:04:23 INFO  : Invoking Bootgen: bootgen -image output.bif -arch zynq -o E:\PhD_project\vivado_prjs\minizedJTAG\minizedJTAG.runs\impl_1\BOOT.bin -w on
+21:04:24 INFO  : Bootgen command execution is done.
